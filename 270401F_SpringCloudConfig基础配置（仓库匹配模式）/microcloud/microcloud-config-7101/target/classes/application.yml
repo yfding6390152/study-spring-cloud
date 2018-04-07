@@ -1,0 +1,17 @@
+server:
+  port: 7101
+spring: 
+  application:
+    name: microcloud-config
+  cloud:  # 进行SpringCloud的相关配置
+    config: # 进行SpringCloudConfig的相关配置
+      server: # 设置服务的连接地址
+        git:  # 本次使用的是GIT作为仓库的管理，所以需要设置GIT的连接地址
+          uri: git@github.com:mldn/microconfig    # 为公共仓库信息，如果某些信息找不到了就使用它
+          repos:
+            microcloud-config-eureka-client:  # 设置指定微服务的仓库信息
+              uri: git@github.com:mldn/microcloud-config-eureka-client
+              pattern: microcloud-config-eureka-client*/dev*  # 只能够访问dev开头的profile
+            microcloud-config-dept-client:   # 设置指定微服务的仓库信息
+              uri: git@github.com:mldn/microcloud-config-dept-client
+              pattern: microcloud-config-dept-client*/beta* # 只能够访问beta开头的profile
